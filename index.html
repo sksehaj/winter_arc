@@ -8,7 +8,7 @@
     <!-- App Icon for iPhone Home Screen -->
     <link rel="apple-touch-icon" href="icon.png">
 
-    <!-- iOS Full-Screen & Startup Screen Configuration -->
+    <!-- iOS Full-Screen & Pure Black OLED Status Bar Setup -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Winter Arc">
@@ -19,7 +19,7 @@
 
     <style>
         :root {
-            --bg-color: #000000; /* Pure Black OLED Theme */
+            --bg-color: #000000; /* Pure Black OLED Theme for Battery Saving */
             --card-bg: #121212;
             --accent-color: #38bdf8;
             --accent-success: #22c55e;
@@ -152,7 +152,7 @@
             border-color: var(--accent-success);
         }
 
-        /* Timer Bar at Bottom */
+        /* Rest Timer Bar */
         .timer-bar {
             position: fixed;
             bottom: 0;
@@ -206,10 +206,10 @@
     </header>
 
     <div class="day-selector">
-        <button class="day-btn active" onclick="switchDay('mon')">Mon</button>
-        <button class="day-btn" onclick="switchDay('tue')">Tue</button>
-        <button class="day-btn" onclick="switchDay('thu')">Thu</button>
-        <button class="day-btn" onclick="switchDay('fri')">Fri</button>
+        <button class="day-btn active" onclick="switchDay('mon', this)">Mon</button>
+        <button class="day-btn" onclick="switchDay('tue', this)">Tue</button>
+        <button class="day-btn" onclick="switchDay('thu', this)">Thu</button>
+        <button class="day-btn" onclick="switchDay('fri', this)">Fri</button>
     </div>
 
     <!-- MONDAY -->
@@ -224,4 +224,44 @@
         <div id="tue-exercises"></div>
     </div>
 
-    <!-- THUR
+    <!-- THURSDAY -->
+    <div id="thu" class="workout-section">
+        <div class="section-title">Thursday — Shoulders + Chest</div>
+        <div id="thu-exercises"></div>
+    </div>
+
+    <!-- FRIDAY -->
+    <div id="fri" class="workout-section">
+        <div class="section-title">Friday — Back + Arms + Forearms</div>
+        <div id="fri-exercises"></div>
+    </div>
+
+    <!-- Rest Timer Bar -->
+    <div class="timer-bar">
+        <div>
+            <div style="font-size: 0.75rem; color: var(--text-muted);">REST TIMER</div>
+            <div class="timer-display" id="timer-display">01:00</div>
+        </div>
+        <div class="timer-controls">
+            <button class="action-btn" onclick="addTime(-15)">-15s</button>
+            <button class="action-btn" onclick="addTime(15)">+15s</button>
+            <button class="action-btn primary" id="timer-toggle-btn" onclick="toggleTimer()">Start</button>
+        </div>
+    </div>
+
+    <script>
+        const workoutData = {
+            mon: [
+                { name: "Floor Press", reps: "12", sets: 3 },
+                { name: "Floor Fly", reps: "8-10", sets: 2 },
+                { name: "Dumbbell Pullover", reps: "10", sets: 2 },
+                { name: "Triceps Extension", reps: "8-10", sets: 3 },
+                { name: "Close-Grip Floor Press", reps: "10", sets: 2 }
+            ],
+            tue: [
+                { name: "One-Arm Row", reps: "12/arm", sets: 3 },
+                { name: "Reverse Fly", reps: "8-10", sets: 2 },
+                { name: "Dumbbell Pullover", reps: "10", sets: 2 },
+                { name: "Dumbbell Curl", reps: "8-10", sets: 3 },
+                { name: "Hammer Curl", reps: "8-10", sets: 3 }
+            ],
