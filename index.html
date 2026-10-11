@@ -8,23 +8,23 @@
     <!-- App Icon for iPhone Home Screen -->
     <link rel="apple-touch-icon" href="icon.png">
 
-    <!-- iOS Full-Screen & Pure Black OLED Status Bar Setup -->
+    <!-- iOS Full-Screen & Startup Screen Configuration -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Winter Arc">
     <meta name="theme-color" content="#000000">
 
-    <!-- Prevent unwanted auto-formatting -->
+    <!-- Prevent automatic phone number formatting on set/rep numbers -->
     <meta name="format-detection" content="telephone=no">
 
     <style>
         :root {
-            --bg-color: #000000; /* Pure OLED Black for Maximum Battery Savings */
+            --bg-color: #000000; /* Pure Black OLED Theme */
             --card-bg: #121212;
             --accent-color: #38bdf8;
             --accent-success: #22c55e;
             --text-main: #f8fafc;
-            --text-muted: #a1a1aa;
+            --text-muted: #94a3b8;
             --border-color: #27272a;
         }
 
@@ -39,30 +39,28 @@
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
-            padding: calc(12px + env(safe-area-inset-top, 16px)) 16px calc(150px + env(safe-area-inset-bottom, 0px)) 16px;
+            padding: calc(12px + env(safe-area-inset-top, 16px)) 16px calc(130px + env(safe-area-inset-bottom, 0px)) 16px;
             max-width: 600px;
             margin: 0 auto;
         }
 
         header {
             text-align: center;
-            margin-bottom: 16px;
+            margin-bottom: 20px;
         }
 
         h1 {
             font-size: 1.5rem;
             color: var(--accent-color);
             text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 800;
+            letter-spacing: 1px;
         }
 
-        /* Day Selector */
         .day-selector {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
             gap: 8px;
-            margin-bottom: 14px;
+            margin-bottom: 20px;
         }
 
         .day-btn {
@@ -80,43 +78,10 @@
 
         .day-btn.active {
             background-color: var(--accent-color);
-            color: #000000;
+            color: #000;
             border-color: var(--accent-color);
         }
 
-        /* Progress Bar */
-        .progress-container {
-            background-color: var(--card-bg);
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            padding: 10px 14px;
-            margin-bottom: 20px;
-        }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            margin-bottom: 6px;
-            font-weight: 600;
-        }
-
-        .progress-bar-bg {
-            background-color: #1f1f23;
-            border-radius: 6px;
-            height: 10px;
-            overflow: hidden;
-        }
-
-        .progress-bar-fill {
-            background: linear-gradient(90deg, #38bdf8, #22c55e);
-            height: 100%;
-            width: 0%;
-            transition: width 0.3s ease;
-        }
-
-        /* Workout Sections */
         .workout-section {
             display: none;
         }
@@ -126,15 +91,13 @@
         }
 
         .section-title {
-            font-size: 1.15rem;
-            margin-bottom: 14px;
+            font-size: 1.2rem;
+            margin-bottom: 12px;
             color: var(--text-main);
             border-bottom: 1px solid var(--border-color);
-            padding-bottom: 8px;
-            font-weight: 700;
+            padding-bottom: 6px;
         }
 
-        /* Exercise Cards */
         .exercise-card {
             background-color: var(--card-bg);
             border: 1px solid var(--border-color);
@@ -151,17 +114,16 @@
         }
 
         .exercise-name {
-            font-size: 0.95rem;
+            font-size: 1rem;
             font-weight: 600;
         }
 
         .exercise-target {
-            font-size: 0.8rem;
+            font-size: 0.85rem;
             color: var(--accent-color);
-            background-color: rgba(56, 189, 248, 0.12);
+            background-color: rgba(56, 189, 248, 0.1);
             padding: 4px 8px;
             border-radius: 6px;
-            font-weight: 600;
         }
 
         .sets-container {
@@ -173,13 +135,12 @@
         .set-btn {
             flex: 1;
             min-width: 60px;
-            background-color: #000000;
+            background-color: var(--bg-color);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            padding: 10px 4px;
-            border-radius: 8px;
+            padding: 8px;
+            border-radius: 6px;
             font-size: 0.85rem;
-            font-weight: 600;
             cursor: pointer;
             text-align: center;
             transition: all 0.2s ease;
@@ -187,68 +148,19 @@
 
         .set-btn.completed {
             background-color: var(--accent-success);
-            color: #ffffff;
+            color: #fff;
             border-color: var(--accent-success);
         }
 
-        /* Reset Week Button */
-        .reset-container {
-            margin-top: 24px;
-            text-align: center;
-        }
-
-        .reset-btn {
-            background-color: transparent;
-            color: #ef4444;
-            border: 1px solid #ef444444;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s ease;
-        }
-
-        .reset-btn:active {
-            background-color: #ef44441a;
-        }
-
-        /* Celebration Banner */
-        .celebration-banner {
-            display: none;
-            background: linear-gradient(135deg, rgba(34,197,94,0.2), rgba(56,189,248,0.2));
-            border: 1px solid var(--accent-success);
-            border-radius: 12px;
-            padding: 14px;
-            text-align: center;
-            margin-bottom: 16px;
-            animation: fadeIn 0.4s ease;
-        }
-
-        .celebration-banner.show {
-            display: block;
-        }
-
-        .celebration-banner h3 {
-            color: var(--accent-success);
-            font-size: 1.05rem;
-            margin-bottom: 4px;
-        }
-
-        .celebration-banner p {
-            font-size: 0.85rem;
-            color: var(--text-main);
-        }
-
-        /* Rest Timer Bar (Sticky Bottom) */
+        /* Timer Bar at Bottom */
         .timer-bar {
             position: fixed;
             bottom: 0;
             left: 0;
             right: 0;
             background-color: rgba(18, 18, 18, 0.95);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
             border-top: 1px solid var(--border-color);
             padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px)) 20px;
             display: flex;
@@ -275,21 +187,15 @@
             background-color: var(--border-color);
             color: var(--text-main);
             border: none;
-            padding: 8px 12px;
+            padding: 8px 14px;
             border-radius: 6px;
             font-weight: 600;
-            font-size: 0.85rem;
             cursor: pointer;
         }
 
         .action-btn.primary {
             background-color: var(--accent-color);
-            color: #000000;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(-6px); }
-            to { opacity: 1; transform: translateY(0); }
+            color: #000;
         }
     </style>
 </head>
@@ -299,29 +205,11 @@
         <h1>Winter Arc</h1>
     </header>
 
-    <!-- Day Selector -->
     <div class="day-selector">
-        <button class="day-btn active" onclick="switchDay('mon', event)">Mon</button>
-        <button class="day-btn" onclick="switchDay('tue', event)">Tue</button>
-        <button class="day-btn" onclick="switchDay('thu', event)">Thu</button>
-        <button class="day-btn" onclick="switchDay('fri', event)">Fri</button>
-    </div>
-
-    <!-- Progress Tracker Bar -->
-    <div class="progress-container">
-        <div class="progress-header">
-            <span>WORKOUT PROGRESS</span>
-            <span id="progress-text">0%</span>
-        </div>
-        <div class="progress-bar-bg">
-            <div id="progress-fill" class="progress-bar-fill"></div>
-        </div>
-    </div>
-
-    <!-- Celebration Banner -->
-    <div id="celebration-banner" class="celebration-banner">
-        <h3>🔥 Workout Complete!</h3>
-        <p>You crushed all sets for today. Great job on your Winter Arc session!</p>
+        <button class="day-btn active" onclick="switchDay('mon')">Mon</button>
+        <button class="day-btn" onclick="switchDay('tue')">Tue</button>
+        <button class="day-btn" onclick="switchDay('thu')">Thu</button>
+        <button class="day-btn" onclick="switchDay('fri')">Fri</button>
     </div>
 
     <!-- MONDAY -->
@@ -336,212 +224,4 @@
         <div id="tue-exercises"></div>
     </div>
 
-    <!-- THURSDAY -->
-    <div id="thu" class="workout-section">
-        <div class="section-title">Thursday — Shoulders + Chest</div>
-        <div id="thu-exercises"></div>
-    </div>
-
-    <!-- FRIDAY -->
-    <div id="fri" class="workout-section">
-        <div class="section-title">Friday — Back + Arms + Forearms</div>
-        <div id="fri-exercises"></div>
-    </div>
-
-    <!-- Reset Week Option -->
-    <div class="reset-container">
-        <button class="reset-btn" onclick="resetWeek()">Reset All Progress</button>
-    </div>
-
-    <!-- Rest Timer Bar -->
-    <div class="timer-bar">
-        <div>
-            <div style="font-size: 0.7rem; color: var(--text-muted); font-weight: 600;">REST TIMER</div>
-            <div class="timer-display" id="timer-display">01:00</div>
-        </div>
-        <div class="timer-controls">
-            <button class="action-btn" onclick="addTime(-15)">-15s</button>
-            <button class="action-btn" onclick="addTime(15)">+15s</button>
-            <button class="action-btn primary" id="timer-toggle-btn" onclick="toggleTimer()">Start</button>
-        </div>
-    </div>
-
-    <script>
-        const workoutData = {
-            mon: [
-                { name: "Floor Press", reps: "12", sets: 3 },
-                { name: "Floor Fly", reps: "8-10", sets: 2 },
-                { name: "Dumbbell Pullover", reps: "10", sets: 2 },
-                { name: "Triceps Extension", reps: "8-10", sets: 3 },
-                { name: "Close-Grip Floor Press", reps: "10", sets: 2 }
-            ],
-            tue: [
-                { name: "One-Arm Row", reps: "12/arm", sets: 3 },
-                { name: "Reverse Fly", reps: "8-10", sets: 2 },
-                { name: "Dumbbell Pullover", reps: "10", sets: 2 },
-                { name: "Dumbbell Curl", reps: "8-10", sets: 3 },
-                { name: "Hammer Curl", reps: "8-10", sets: 3 }
-            ],
-            thu: [
-                { name: "Shoulder Press", reps: "6-8", sets: 3 },
-                { name: "Lateral Raise", reps: "8-10", sets: 3 },
-                { name: "Rear-Delt Fly", reps: "8-10", sets: 3 },
-                { name: "Floor Press", reps: "10-12", sets: 3 },
-                { name: "Floor Fly", reps: "8-10", sets: 2 }
-            ],
-            fri: [
-                { name: "One-Arm Row", reps: "12/arm", sets: 3 },
-                { name: "Reverse Fly", reps: "8-10", sets: 2 },
-                { name: "Dumbbell Curl", reps: "8-10", sets: 3 },
-                { name: "Hammer Curl", reps: "8-10", sets: 2 },
-                { name: "Triceps Extension", reps: "8-10", sets: 3 },
-                { name: "Close-Grip Floor Press", reps: "10", sets: 2 },
-                { name: "Wrist Curl", reps: "12-15", sets: 2 },
-                { name: "Reverse Wrist Curl", reps: "10-12", sets: 2 }
-            ]
-        };
-
-        let currentActiveDay = 'mon';
-
-        // Render Workouts
-        function renderWorkouts() {
-            Object.keys(workoutData).forEach(day => {
-                const container = document.getElementById(`${day}-exercises`);
-                container.innerHTML = '';
-                
-                workoutData[day].forEach((ex, exIndex) => {
-                    const card = document.createElement('div');
-                    card.className = 'exercise-card';
-                    
-                    let setsHTML = '';
-                    for (let s = 1; s <= ex.sets; s++) {
-                        const id = `${day}-${exIndex}-${s}`;
-                        setsHTML += `<button id="${id}" class="set-btn" onclick="toggleSet('${id}')">Set ${s}</button>`;
-                    }
-
-                    card.innerHTML = `
-                        <div class="exercise-header">
-                            <span class="exercise-name">${ex.name}</span>
-                            <span class="exercise-target">${ex.reps} reps</span>
-                        </div>
-                        <div class="sets-container">${setsHTML}</div>
-                    `;
-                    container.appendChild(card);
-                });
-            });
-            restoreProgress();
-        }
-
-        // Switch Active Day
-        function switchDay(dayKey, event) {
-            currentActiveDay = dayKey;
-            document.querySelectorAll('.workout-section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.day-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(dayKey).classList.add('active');
-            if (event && event.target) {
-                event.target.classList.add('active');
-            }
-            updateProgressBar();
-        }
-
-        // Toggle Set Completion
-        function toggleSet(setId) {
-            const btn = document.getElementById(setId);
-            btn.classList.toggle('completed');
-            
-            // Save state in localStorage
-            const completedSets = JSON.parse(localStorage.getItem('completedSets') || '{}');
-            completedSets[setId] = btn.classList.contains('completed');
-            localStorage.setItem('completedSets', JSON.stringify(completedSets));
-
-            // Start rest timer on set check-off
-            if (btn.classList.contains('completed')) {
-                resetTimer(60);
-                startTimer();
-            }
-
-            updateProgressBar();
-        }
-
-        // Restore Progress from Local Storage
-        function restoreProgress() {
-            const completedSets = JSON.parse(localStorage.getItem('completedSets') || '{}');
-            Object.keys(completedSets).forEach(setId => {
-                const btn = document.getElementById(setId);
-                if (btn && completedSets[setId]) {
-                    btn.classList.add('completed');
-                }
-            });
-            updateProgressBar();
-        }
-
-        // Progress Bar & Celebration Banner Logic
-        function updateProgressBar() {
-            const activeSection = document.getElementById(currentActiveDay);
-            const totalSets = activeSection.querySelectorAll('.set-btn').length;
-            const completedSets = activeSection.querySelectorAll('.set-btn.completed').length;
-            
-            const percent = totalSets > 0 ? Math.round((completedSets / totalSets) * 100) : 0;
-            
-            document.getElementById('progress-fill').style.width = `${percent}%`;
-            document.getElementById('progress-text').innerText = `${percent}% (${completedSets}/${totalSets})`;
-
-            const banner = document.getElementById('celebration-banner');
-            if (percent === 100 && totalSets > 0) {
-                banner.classList.add('show');
-            } else {
-                banner.classList.remove('show');
-            }
-        }
-
-        // Reset All Progress
-        function resetWeek() {
-            if (confirm("Are you sure you want to reset all workout progress for the week?")) {
-                localStorage.removeItem('completedSets');
-                document.querySelectorAll('.set-btn').forEach(btn => btn.classList.remove('completed'));
-                updateProgressBar();
-            }
-        }
-
-        // Timer Logic
-        let timerInterval = null;
-        let timeLeft = 60;
-        let isRunning = false;
-
-        function updateDisplay() {
-            const mins = Math.floor(timeLeft / 60);
-            const secs = timeLeft % 60;
-            document.getElementById('timer-display').innerText = 
-                `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-        }
-
-        function startTimer() {
-            if (isRunning) clearInterval(timerInterval);
-            isRunning = true;
-            document.getElementById('timer-toggle-btn').innerText = 'Pause';
-            
-            timerInterval = setInterval(() => {
-                if (timeLeft > 0) {
-                    timeLeft--;
-                    updateDisplay();
-                } else {
-                    clearInterval(timerInterval);
-                    isRunning = false;
-                    document.getElementById('timer-toggle-btn').innerText = 'Start';
-                }
-            }, 1000);
-        }
-
-        function toggleTimer() {
-            if (isRunning) {
-                clearInterval(timerInterval);
-                isRunning = false;
-                document.getElementById('timer-toggle-btn').innerText = 'Start';
-            } else {
-                startTimer();
-            }
-        }
-
-        function resetTimer(seconds) {
-            clearInterval
+    <!-- THUR
